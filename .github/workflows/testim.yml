@@ -1,0 +1,13 @@
+name: Testim E2E
+on: [push]
+
+jobs:
+    run-testimio-cli:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                node-version: '16.13.0'
+            - run: npm install -g @testim/testim-cli
+            - run: testim --token "nIcChdm2c3vIwCsK9S9n1hTtJvgqfd3ODmbCyXBU2u4jLbQl03" --project "ZZuBDeMr3udgJ6bK4DNt" --grid "Testim-Grid"
