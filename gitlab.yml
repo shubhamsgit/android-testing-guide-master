@@ -1,0 +1,18 @@
+image: node:16.13.0
+stages:
+  - e2e
+testim:
+  stage: e2e
+  image: docker:git
+  variables:
+    TESTIM_DOCKER: testim/docker-cli
+  services:
+    - docker:stable-dind
+  script:
+    - docker pull $TESTIM_DOCKER
+    - docker run --rm -v "$(pwd)":/opt/testim-runner $TESTIM_DOCKER --token "nIcChdm2c3vIwCsK9S9n1hTtJvgqfd3ODmbCyXBU2u4jLbQl03" --project "ZZuBDeMr3udgJ6bK4DNt" --grid "Testim-Grid" -r /opt/testim-runner/testim-report.xml
+  artifacts:
+    paths:
+      - testim-report.xml
+    reports:
+      junit: testim-report.xml
